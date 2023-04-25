@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from torchvision import transforms, models
 from PIL import Image
-
+from utils import get_model, metrics_eval, report_eval
 
 class SyntheticDataset(Dataset):
     def __init__(self, data_path, classes, transform=None):
@@ -37,72 +37,9 @@ class SyntheticDataset(Dataset):
         return image, label
 
 
-def get_model(args):
-    if args.model == "resnet50":
-        model = models.resnet50(pretrained=True)
-        model.fc = torch.nn.Sequential(torch.nn.Linear(2048, 1), torch.nn.Sigmoid())
-    elif args.model == "vgg16":
-        model = models.vgg16(pretrained=True)
-        model.classifier[-1] = torch.nn.Sequential(
-            torch.nn.Linear(4096, 1), torch.nn.Sigmoid()
-        )
-    else:
-        raise ValueError("Model {} not supported".format(args.model))
-    if args.ckpt_path:
-        model.load_state_dict(torch.load(args.ckpt_path))
-    model = model.eval()
-    return model
-
-
-def metrics_eval(preds, labels):
-    tp = torch.sum((preds == 1) & (labels == 1)).float()
-    tn = torch.sum((preds == 0) & (labels == 0)).float()
-    fp = torch.sum((preds == 1) & (labels == 0)).float()
-    fn = torch.sum((preds == 0) & (labels == 1)).float()
-    acc = (tp + tn) / (tp + tn + fp + fn)
-    prec = tp / (tp + fp)
-    rec = tp / (tp + fn)
-    f1 = -1 if prec + rec == 0 else 2 * prec * rec / (prec + rec)
-    return acc.cpu(), prec.cpu(), rec.cpu(), f1.cpu()
-
-
-def report_eval(writer, attribute, metric_dict):
-    print("Attribute: {}".format(attribute))
-    for attr_value, metric in metric_dict.items():
-        writer.add_scalar("Eval/{}/acc".format(attr_value), metric[0])
-        writer.add_scalar("Eval/{}/prec".format(attr_value), metric[1])
-        writer.add_scalar("Eval/{}/rec".format(attr_value), metric[2])
-        writer.add_scalar("Eval/{}/f1".format(attr_value), metric[3])
-        print(
-            "\t{} - acc: {:.4f}, prec: {:.4f}, rec: {:.4f}, f1: {:.4f}".format(
-                attr_value, *metric
-            )
-        )
-    writer.add_scalar(
-        "Eval/Overall/acc", np.mean([metric[0] for metric in metric_dict.values()])
-    )
-    writer.add_scalar(
-        "Eval/Overall/prec", np.mean([metric[1] for metric in metric_dict.values()])
-    )
-    writer.add_scalar(
-        "Eval/Overall/rec", np.mean([metric[2] for metric in metric_dict.values()])
-    )
-    writer.add_scalar(
-        "Eval/Overall/f1", np.mean([metric[3] for metric in metric_dict.values()])
-    )
-    print(
-        "Overall - acc: {:.4f}, prec: {:.4f}, rec: {:.4f}, f1: {:.4f}".format(
-            np.mean([metric[0] for metric in metric_dict.values()]),
-            np.mean([metric[1] for metric in metric_dict.values()]),
-            np.mean([metric[2] for metric in metric_dict.values()]),
-            np.mean([metric[3] for metric in metric_dict.values()]),
-        )
-    )
-
-
 def eval_baseline(args, gpu_id):
     device = torch.device("cuda:{}".format(gpu_id))
-    model = get_model(args)
+    model = get_model(args.model, args.num_classes, args.ckpt_path)
     model = model.to(device)
     metric_dict = {}
     log_dir = os.path.join("runs", "baseline")
@@ -143,7 +80,7 @@ def eval_baseline(args, gpu_id):
 
 def diagnose_attribute(args, attr_path, gpu_id):
     device = torch.device("cuda:{}".format(gpu_id))
-    model = get_model(args)
+    model = get_model(args.model, args.num_classes, args.ckpt_path)
     model = model.to(device)
     attr_values = os.listdir(attr_path)
     metric_dict = {}
@@ -216,6 +153,7 @@ def get_args():
 
 def main():
     args = get_args()
+    args.num_classes = len(args.classes)
     if args.baseline:
         eval_baseline(args, 0)
     else:

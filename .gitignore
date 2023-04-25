@@ -2,3 +2,4 @@ experiments
 runs
 generations
 models
+*/__pycache__/*

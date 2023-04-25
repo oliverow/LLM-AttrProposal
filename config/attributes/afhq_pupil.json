@@ -1,0 +1,16 @@
+{
+    "classes": [
+        "dog",
+        "cat"
+    ],
+    "prompt_prefix": "a photo of the head of a {}, ",
+    "prompt_surfix": "realistic, afhq, high quality, real-world",
+    "attributes": {
+        "pupil": [
+            "vertical",
+            "horizontal",
+            "round",
+            "diamond"
+        ]
+    }
+}

@@ -1,0 +1,1 @@
+python code/classifier.py --do_test --test_path /home/oliver/projects/experiments/dataset_interfaces_generation/unedited_gen --ckpt_path models/afhq_vgg16_0_enhanced.pt 

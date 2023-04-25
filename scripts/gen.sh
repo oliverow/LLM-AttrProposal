@@ -1,1 +1,1 @@
-python code/gen.py --num_steps 50 --images_per_prompt 8 --generation_repeats 4
+python code/gen.py --num_steps 50 --images_per_prompt 8 --generation_repeats 4 --attr_file config/attributes/afhq_pupil.json
