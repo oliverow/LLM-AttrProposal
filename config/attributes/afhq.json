@@ -1,0 +1,136 @@
+{
+    "classes": [
+        "dog",
+        "cat"
+    ],
+    "prompt_prefix": "a photo of the head of a {}, ",
+    "prompt_surfix": "realistic, afhq, high quality, real-world",
+    "attributes": {
+        "fur_color": [
+            "black",
+            "white",
+            "brown",
+            "gray",
+            "orange",
+            "multicolored"
+        ],
+        "fur_pattern": [
+            "solid",
+            "spotted",
+            "striped",
+            "mottled"
+        ],
+        "eye_color": [
+            "blue",
+            "green",
+            "brown",
+            "amber",
+            "heterochromia"
+        ],
+        "ear_shape": [
+            "pointed (upright)",
+            "folded",
+            "rounded (upright)",
+            "floppy"
+        ],
+        "head_shape": [
+            "round",
+            "triangular",
+            "square"
+        ],
+        "nose_shape": [
+            "flat",
+            "pointed",
+            "button"
+        ],
+        "facial_expression": [
+            "neutral",
+            "happy",
+            "angry",
+            "scared",
+            "sad"
+        ],
+        "image_background": [
+            "indoor",
+            "outdoor",
+            "solid color",
+            "patterned"
+        ],
+        "image_lighting": [
+            "bright",
+            "normal",
+            "dim",
+            "shadowed"
+        ],
+        "image_quality": [
+            "high resolution",
+            "medium resolution",
+            "low resolution",
+            "blurry",
+            "noisy"
+        ],
+        "image_orientation": [
+            "frontal view",
+            "profile view (left or right)",
+            "tilted (left or right)",
+            "tilted up",
+            "tilted down"
+        ],
+        "whiskers": [
+            "long",
+            "short",
+            "sparse",
+            "dense",
+            "none"
+        ],
+        "facial_markings": [
+            "none",
+            "mask",
+            "blaze",
+            "eye patches",
+            "other unique markings"
+        ],
+        "mouth_shape": [
+            "closed",
+            "slightly open",
+            "fully open"
+        ],
+        "tongue": [
+            "not visible",
+            "partially visible",
+            "fully visible"
+        ],
+        "teeth": [
+            "not visible",
+            "partially visible",
+            "fully visible"
+        ],
+        "collar": [
+            "none",
+            "basic collar",
+            "harness",
+            "bandana",
+            "other accessories"
+        ],
+        "image_zoom": [
+            "close-up (only face visible)",
+            "medium (face and some surrounding area visible)",
+            "far (entire head and some body visible)"
+        ],
+        "image_focus": [
+            "subject in focus",
+            "subject slightly out of focus",
+            "subject completely out of focus"
+        ],
+        "image_perspective": [
+            "eye level",
+            "low angle",
+            "high angle"
+        ],
+        "eye_shape": [
+            "round",
+            "almond",
+            "slanted"
+        ]
+    }
+}

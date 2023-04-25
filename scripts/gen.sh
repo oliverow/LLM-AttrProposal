@@ -1,0 +1,1 @@
+python code/gen.py --num_steps 50 --images_per_prompt 8 --generation_repeats 4

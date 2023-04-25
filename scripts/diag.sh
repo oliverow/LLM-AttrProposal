@@ -1,0 +1,1 @@
+python code/diag.py --data_dir generations --model vgg16 --ckpt_path models/afhq_vgg16_0_.pt 

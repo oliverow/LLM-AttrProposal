@@ -1,0 +1,21 @@
+{
+    "size": ["small", "medium", "large"],
+    "fur": ["short", "medium", "long"],
+    "fur color": ["solid", "bicolor", "tricolor", "tabby", "unique patterns"],
+    "ear": ["pointed", "rounded", "folded"],
+    "tail": ["long", "medium", "short", "bobbed", "none"],
+    "body shape": ["slender", "muscular", "stocky"],
+    "leg": ["short", "medium-length", "long"],
+    "eye": ["round", "almond", "slanted"],
+    "eye color": ["blue", "green", "yellow", "amber", "brown", "heterochromia"],
+    "facial structure": ["flat-faced", "average muzzle length", "long muzzle"],
+    "head": ["round", "square", "triangular"],
+    "whiskers": ["long", "short", "curled", "no"],
+    "nose": ["flat", "medium", "long narrow"],
+    "paw size": ["small", "medium", "large"],
+    "coat texture": ["smooth", "wavy", "curly", "wirehaired"],
+    "behavior personality": ["playful", "affectionate", "independent", "energetic", "timid", "aggressive"],
+    "breed features": ["dropped ears", "erect ears", "docked tail", "natural tail curl", "tufted ears", "no fur", "extra toes"],
+    "vocalizations": ["barking", "meowing", "purring", "growling", "hissing", "whining"],
+    "gait": ["walking", "trotting", "running", "galloping"]
+}
